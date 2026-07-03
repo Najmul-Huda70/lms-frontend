@@ -269,7 +269,7 @@ export default function Classroom({ courses = [], loading = false }) {
   const [selYear, setSelYear] = useState("All");
   const [selSem, setSelSem] = useState("All");
   const [selType, setSelType] = useState("All");
-  const [selStatus, setSelStatus] = useState("Running"); // default: Running
+  const [selStatus, setSelStatus] = useState("Running"); 
   const [currentPage, setCurrentPage] = useState(1);
 
   // ── Detect running session from data ──────────────────────

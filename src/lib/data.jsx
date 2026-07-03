@@ -63,6 +63,7 @@ export const fetchStudentCourses = async (userId, token) => {
 };
 export const fetchTeachesCoursesByUserId= async (userId, token) => {
   try {
+    // console.log('userId with data.js:',userId);
     const res = await fetch(`${BASE_URL}/teaches/search?userId=${userId}`, {
       method: "GET",
       headers: {

@@ -2,14 +2,15 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { signOut, useSession } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import { signOut, useSession } from "@/lib/auth-client";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const { data: session } = useSession();
   const user = session?.user;
+  console.log('user from navbar:',user);
   const isUserSignin = session && user; 
   const router = useRouter();
 
@@ -75,7 +76,7 @@ export default function Navbar() {
         <nav className="hidden sm:grid">
           <ul className="flex text-md gap-5">
             <Link href={"/"}>Home</Link>
-            {isUserSignin && <Link href={"/classroom"}>Classroom</Link>}
+            {isUserSignin && <Link href={`/dashboard/${user?.role}/classroom`}>Classroom</Link>}
             <Link href={"/features"}>Features</Link>
             <Link href={"/notice"}>Notice</Link>
           </ul>
@@ -147,7 +148,7 @@ export default function Navbar() {
                   <div className="py-1.5 bg-gray-950">
                     {/* Profile Link */}
                     <Link
-                      href="/profile"
+                      href={`/dashboard/${user?.role}/profile`}
                       className="group relative flex items-center px-4 py-2.5 text-sm transition-all duration-200 hover:bg-gray-900"
                     >
                       <div className="absolute left-0 top-0 h-full w-1 bg-blue-500 rounded-r opacity-0 group-hover:opacity-100 transition-all duration-200 scale-y-80 group-hover:scale-y-100"></div>
@@ -164,7 +165,7 @@ export default function Navbar() {
 
                     {/* Settings Link */}
                     <Link
-                      href="/setting"
+                      href={`/dashboard/${user?.role}/settings`}
                       className="group relative flex items-center px-4 py-2.5 text-sm transition-all duration-200 hover:bg-gray-900"
                     >
                       <div className="absolute left-0 top-0 h-full w-1 bg-blue-500 rounded-r opacity-0 group-hover:opacity-100 transition-all duration-200 scale-y-80 group-hover:scale-y-100"></div>
@@ -244,7 +245,7 @@ export default function Navbar() {
         {/* Menu Items */}
         <ul className="flex flex-col gap-4 p-4 text-md">
           <Link href={"/"} onClick={() => setOpen(false)}>Home</Link>
-          {isUserSignin && <Link href={"/classroom"} onClick={() => setOpen(false)}>Classroom</Link>}
+          {isUserSignin && <Link href={`/dashboard/${user?.role}/classroom`} onClick={() => setOpen(false)}>Classroom</Link>}
           <Link href={"/features"} onClick={() => setOpen(false)}>Features</Link>
           <Link href={"/notice"} onClick={() => setOpen(false)}>Notice</Link>
         </ul>

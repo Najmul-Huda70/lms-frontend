@@ -1,11 +1,10 @@
 import { betterAuth } from "better-auth";
 import { jwt } from "better-auth/plugins";
+import { dbPool } from "db";
 
 export const auth = betterAuth({
-  database: {
-    provider: "mysql",
-    url: process.env.DATABASE_URL,
-  },
+  database: dbPool,
+
   emailAndPassword: {
     enabled: true,
   },
